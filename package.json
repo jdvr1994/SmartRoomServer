@@ -1,0 +1,20 @@
+{
+  "name": "SmartRoomIOT",
+  "version": "1.0.0",
+  "description": "servidor con Node JS y Mongo DB capaz de interactuar con dispositivos IOT a travez de HttpPost (Particle Photon) y WebSockets (Node LUA ESP12E)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdvr1994/SmartRoomServer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jdvr1994/SmartRoomServer/issues"
+  },
+  "homepage": "https://github.com/jdvr1994/SmartRoomServer#readme"
+}
