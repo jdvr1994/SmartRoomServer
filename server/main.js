@@ -12,7 +12,7 @@ var getSound = "getSound";
 
 var messages = [{
         id : 1,
-        text : "Hola soy el servidor",
+        text : "Hola soy el servidor mas pro",
         author : "Servidor "
 }];
 
