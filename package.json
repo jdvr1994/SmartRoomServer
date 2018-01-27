@@ -4,7 +4,7 @@
   "description": "servidor con Node JS y Mongo DB capaz de interactuar con dispositivos IOT a travez de HttpPost (Particle Photon) y WebSockets (Node LUA ESP12E)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server/main.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/jdvr1994/SmartRoomServer/issues"
   },
-  "homepage": "https://github.com/jdvr1994/SmartRoomServer#readme"
+  "homepage": "https://github.com/jdvr1994/SmartRoomServer#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "socket.io": "^2.0.4",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.11"
+  }
 }
