@@ -24,7 +24,7 @@ app.use(express.static('public'));
 
 //Una pagina Web en la url localhost:8080/web con parametros
 app.get('/web/:nombre', function(req, res) {
-  res.status(200).send({mensaje: 'Hola ${req.params.nombre}!'});
+  res.status(200).send({mensaje: `Hola ${req.params.nombre}!`});
 });
 
 //---------- Web Socket -----------------------
