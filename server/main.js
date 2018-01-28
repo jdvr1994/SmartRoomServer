@@ -4,7 +4,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const bodyParser = require('body-parser');
-
+const mongoose = require('mongoose');
 
 //--------------------------------- Particle Photon ----------------------------- 
 var deviceID = "2f002f000547343232363230"; 
@@ -47,6 +47,11 @@ app.put('/api/product/:productId',function(req, res){
 
 app.delete('/api/product/:productId',function(req, res){
   
+});
+
+mongoose.connect('mongodb://localhost:27017/shop',function(err, res){
+    if(err) throw err
+    console.log('Conexion a la base de datos establecida...');
 });
 
 //---------- Web Socket -----------------------
