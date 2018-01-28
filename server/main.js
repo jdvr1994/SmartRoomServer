@@ -50,7 +50,9 @@ app.delete('/api/product/:productId',function(req, res){
 });
 
 mongoose.connect('mongodb://localhost:27017/shop',function(err, res){
-    if(err) throw err
+    if(err) {
+      return console.log(`Error al conectar a la base de datos: ${err}`);
+    }
     console.log('Conexion a la base de datos establecida...');
 });
 
