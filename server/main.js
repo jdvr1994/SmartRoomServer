@@ -3,6 +3,8 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const bodyParser = require('body-parser');
+
 
 //--------------------------------- Particle Photon ----------------------------- 
 var deviceID = "2f002f000547343232363230"; 
@@ -13,15 +15,19 @@ var getSound = "getSound";
 var messages = [{
         id : 1,
         text : "Hola soy el servidor mas pro",
-        author : "Servidor "
+        author : "Servidor"
 }];
 
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
 app.use(express.static('public'));
 
-app.get('/hello', function(req, res) {
-  res.status(200).send("Hello World!");
+//Una pagina Web en la url localhost:8080/hola
+app.get('/hola', function(req, res) {
+  res.status(200).send({mensaje: 'Hola mundo!'});
 });
 
+//---------- Web Socket -----------------------
 io.on('connection', function(socket) {
   console.log('Alguien se ha conectado con Sockets');
   socket.emit('messages', messages);
