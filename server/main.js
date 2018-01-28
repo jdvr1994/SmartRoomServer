@@ -61,6 +61,10 @@ io.on('connection', function(socket) {
   console.log('Alguien se ha conectado con Sockets');
   socket.emit('messages', messages);
 
+  socket.on('disconnect', function(data) {
+    console.log("Cliente desconectado");
+  });
+
   socket.on('new-message', function(data) {
     messages.push(data);
     io.sockets.emit('messages', messages);
