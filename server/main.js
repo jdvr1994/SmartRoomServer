@@ -22,9 +22,31 @@ app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-//Una pagina Web en la url localhost:8080/web con parametros
+//Una pagina Web en la url localhost:8080/web con parametros nombre y edad
 app.get('/web/:nombre&:edad', function(req, res) {
   res.status(200).send({mensaje: `Hola ${req.params.nombre} , tienes ${req.params.edad} años!`});
+});
+
+//------------------------ Ejemplo para API REST de una lista de productos ------------
+//-------------------------------------------------------------------------------------
+app.get('/api/product', function(req, res) {
+  res.status(200).send({productos: []});
+});
+
+app.get('/api/product/:productId', function(req, res) {
+  
+});
+
+app.post('/api/product', function(req, res) {
+  res.status(200).send({mensaje: 'el producto se ha recibido', producto : req.body});
+});
+
+app.put('/api/product/:productId',function(req, res){
+
+});
+
+app.delete('/api/product/:productId',function(req, res){
+  
 });
 
 //---------- Web Socket -----------------------
