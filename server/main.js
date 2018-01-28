@@ -22,9 +22,9 @@ app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-//Una pagina Web en la url localhost:8080/hola
-app.get('/hola', function(req, res) {
-  res.status(200).send({mensaje: 'Hola mundo!'});
+//Una pagina Web en la url localhost:8080/web con parametros
+app.get('/web/:nombre&:edad', function(req, res) {
+  res.status(200).send({mensaje: 'Hola ${req.params.nombre}, tienes ${req.params.edad} años!'});
 });
 
 //---------- Web Socket -----------------------
