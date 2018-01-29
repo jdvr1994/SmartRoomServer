@@ -30,7 +30,7 @@ function saveProduct(req, res){
   })
 }
 
-function getProducts(){
+function getProducts(req,res){
   Product.find({}, function(err, products){
     if(err) return res.status(500).send({mensaje : `Error al realizar la peticion: ${err}`})
     if(!products) return res.status(404).send({mensaje: 'No hay ningun producto registrado'})
