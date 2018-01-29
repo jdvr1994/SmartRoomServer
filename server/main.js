@@ -70,7 +70,13 @@ app.post('/api/product', function(req, res) {
 });
 
 app.put('/api/product/:productId',function(req, res){
+    let productId = req.params.productId;
+    let update = req.body
 
+    Product.findByIdAndUpdate(productId, update, function(err, productUpdate){
+      if(err) return res.status(500).send({mensaje : `Error al actualizar el producto: ${err}`})
+      res.status(200).send({producto: productUpdate})
+    });
 });
 
 app.delete('/api/product/:productId',function(req, res){
