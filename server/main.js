@@ -1,6 +1,6 @@
 
 const app = require('./app');
-
+const config = require('../config');
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
@@ -8,10 +8,7 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const mongoose = require('mongoose');
 
 //--------------------------------- Particle Photon -----------------------------
-var deviceID = "2f002f000547343232363230";
-var accessToken = "568d5c6368bd5953803c898096987ba1dd5c5ece";
 var setMode = "setMode";
-var getSound = "getSound";
 
 var messages = [{
         id : 1,
@@ -19,7 +16,7 @@ var messages = [{
         author : "Servidor"
 }];
 
-mongoose.connect('mongodb://localhost:27017/shop',function(err, res){
+mongoose.connect(config.db,function(err, res){
     if(err) {
       return console.log(`Error al conectar a la base de datos: ${err}`);
     }
@@ -48,16 +45,16 @@ io.on('connection', function(socket) {
   });
 });
 
-server.listen(8080, function() {
+server.listen(config.portServer, function() {
   console.log("Servidor corriendo en http://localhost:8080");
 });
 
 
 function setModeVumeter(newValue){
-	var requestURL = "https://api.particle.io/v1/devices/" + deviceID + "/" + setMode + "/";
+	var requestURL = config.photonURL + config.photonID + "/" + setMode + "/";
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.open("POST", requestURL, false);
 	xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	xmlHttp.send("params="+newValue+"&access_token="+accessToken);
+	xmlHttp.send("params="+newValue+"&access_token="+config.photonAccessToken);
 	return xmlHttp.responseText;
 }
