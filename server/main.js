@@ -33,7 +33,11 @@ app.get('/web/:nombre&:edad', function(req, res) {
 //------------------------ Ejemplo para API REST de una lista de productos ------------
 //-------------------------------------------------------------------------------------
 app.get('/api/product', function(req, res) {
-  res.status(200).send({productos: []});
+  Product.find({}, function(err, products){
+    if(err) return res.status(500).send({mensaje : `Error al realizar la peticion: ${err}`})
+    if(!products) return res.status(404).send({mensaje: 'No hay ningun producto registrado'})
+    res.status(200).send({productos: products});
+  })
 });
 
 app.get('/api/product/:productId', function(req, res) {
