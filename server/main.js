@@ -74,7 +74,18 @@ app.put('/api/product/:productId',function(req, res){
 });
 
 app.delete('/api/product/:productId',function(req, res){
+  let productId = req.params.productId;
 
+  Product.findById(productId, function(err, product){
+    if(err) return res.status(500).send({mensaje : `Error al borrar el producto: ${err}`})
+    if(!product) return res.status(404).send({mensaje: 'El producto no existe'})
+
+    product.remove(function(err){
+      if(err) return res.status(500).send({mensaje : `Error al borrar el producto: ${err}`})
+      res.status(200).send({mensaje: 'El producto ha sido eliminado'})
+    })
+
+  });
 });
 
 mongoose.connect('mongodb://localhost:27017/shop',function(err, res){
