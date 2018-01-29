@@ -6,9 +6,11 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-//--------------------------------- Particle Photon ----------------------------- 
-var deviceID = "2f002f000547343232363230"; 
-var accessToken = "568d5c6368bd5953803c898096987ba1dd5c5ece"; 
+const Product = require('../models/product');
+
+//--------------------------------- Particle Photon -----------------------------
+var deviceID = "2f002f000547343232363230";
+var accessToken = "568d5c6368bd5953803c898096987ba1dd5c5ece";
 var setMode = "setMode";
 var getSound = "getSound";
 
@@ -27,6 +29,7 @@ app.get('/web/:nombre&:edad', function(req, res) {
   res.status(200).send({mensaje: `Hola ${req.params.nombre} , tienes ${req.params.edad} años!`});
 });
 
+
 //------------------------ Ejemplo para API REST de una lista de productos ------------
 //-------------------------------------------------------------------------------------
 app.get('/api/product', function(req, res) {
@@ -34,11 +37,25 @@ app.get('/api/product', function(req, res) {
 });
 
 app.get('/api/product/:productId', function(req, res) {
-  
+
 });
 
 app.post('/api/product', function(req, res) {
-  res.status(200).send({mensaje: 'el producto se ha recibido', producto : req.body});
+  console.log('POST /api/product')
+  console.log(req.body)
+
+  let product = new Product();
+  product.name = req.body.name
+  product.picture = req.body.picture
+  product.price = req.body.price
+  product.category = req.body.category
+  product.description = req.body.description
+
+  product.save((err,productStored)=>{
+    if(err) res.status(500).send({mensaje : `Error al salvar en la base de datos: ${err}`})
+
+    res.status(200).send({product: productStored})
+  })
 });
 
 app.put('/api/product/:productId',function(req, res){
@@ -46,7 +63,7 @@ app.put('/api/product/:productId',function(req, res){
 });
 
 app.delete('/api/product/:productId',function(req, res){
-  
+
 });
 
 mongoose.connect('mongodb://localhost:27017/shop',function(err, res){
@@ -57,6 +74,7 @@ mongoose.connect('mongodb://localhost:27017/shop',function(err, res){
 });
 
 //---------- Web Socket -----------------------
+//---------------------------------------------
 io.on('connection', function(socket) {
   console.log('Alguien se ha conectado con Sockets');
   socket.emit('messages', messages);
@@ -90,4 +108,3 @@ function setModeVumeter(newValue){
 	xmlHttp.send("params="+newValue+"&access_token="+accessToken);
 	return xmlHttp.responseText;
 }
-
