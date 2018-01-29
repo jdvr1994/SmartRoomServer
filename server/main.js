@@ -62,8 +62,8 @@ app.post('/api/product', function(req, res) {
   product.category = req.body.category
   product.description = req.body.description
 
-  product.save((err,productStored)=>{
-    if(err) res.status(500).send({mensaje : `Error al salvar en la base de datos: ${err}`})
+  product.save((error,productStored)=>{
+    if(err) res.status(500).send({mensaje : `Error al salvar en la base de datos: ${error}`})
 
     res.status(200).send({product: productStored})
   })
