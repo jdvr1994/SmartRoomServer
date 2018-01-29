@@ -37,7 +37,14 @@ app.get('/api/product', function(req, res) {
 });
 
 app.get('/api/product/:productId', function(req, res) {
+  let productId = req.params.productId;
 
+  Product.findById(productId, function(err, product){
+    if(err) return res.status(500).send({mensaje : `Error al realizar la peticion: ${err}`})
+    if(!product) return res.status(404).send({mensaje: 'El producto no existe'})
+
+    res.status(200).send({producto: product})
+  });
 });
 
 app.post('/api/product', function(req, res) {
