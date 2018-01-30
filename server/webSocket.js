@@ -2,6 +2,7 @@
 const app = require('./app');
 const config = require('../config');
 const Photon = require('../controllers/photon');
+const Chat = require('../controllers/chat');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
@@ -15,7 +16,7 @@ var messages = [{
 //---------------------------------------------
 io.on('connection', function(socket) {
   console.log('Alguien se ha conectado con Sockets');
-  socket.emit('messages', messages);
+  Chat.begin(socket);
 
   socket.on('disconnect', function(data) {
     console.log("Cliente desconectado");
