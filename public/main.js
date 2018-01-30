@@ -1,5 +1,5 @@
 const config = require('../config');
-var socket = io.connect('http://146.71.79.215:8080', { 'forceNew': true });
+var socket = io.connect(config.portClient, { 'forceNew': true });
 
 socket.on('messages', function(data) {
   console.log(data);
