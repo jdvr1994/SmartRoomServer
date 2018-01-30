@@ -29,7 +29,6 @@ io.on('connection', function(socket) {
 	   console.log("android OK"+vumeter.modo)
   })
 
-
 });
 
 module.exports = server
