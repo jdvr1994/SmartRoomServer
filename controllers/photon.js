@@ -1,4 +1,5 @@
 'use strict'
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const config = require('../config');
 var setMode = "setMode";
 
