@@ -11,9 +11,5 @@ function setModeVumeter(newValue){
 }
 
 module.exports = {
-  getProduct,
-  saveProduct,
-  getProducts,
-  updateProduct,
-  deleteProduct
+  setModeVumeter
 }
