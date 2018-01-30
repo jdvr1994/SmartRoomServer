@@ -9,6 +9,14 @@ function begin(socket){
   socket.emit('messages', messages);
 }
 
+function newMessage(socket){
+  socket.on('new-message', function(data) {
+      messages.push(data);
+      io.sockets.emit('messages', messages);
+  });
+}
+
 module.exports = {
-  begin
+  begin,
+  newMessage
 }
