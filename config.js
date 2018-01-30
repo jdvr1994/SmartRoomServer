@@ -1,5 +1,4 @@
 module.exports = {
-  portClient: 'http://146.71.79.215:8080',
   db : 'mongodb://localhost:27017/shop',
   portServer : 8080,
   photonID : '2f002f000547343232363230',
