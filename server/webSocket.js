@@ -11,7 +11,7 @@ const io = require('socket.io')(server);
 io.on('connection', function(socket) {
   console.log('Alguien se ha conectado con Sockets');
   Chat.begin(socket)
-  Chat.newMessage(socket)
+  Chat.newMessage(socket,io)
 
   socket.on('disconnect', function(data) {
     console.log("Cliente desconectado");
