@@ -7,15 +7,15 @@ function isAuth(req,res, next){
     return res.status(403).send({mensaje : 'No tienes autorizacion'})
   }
   const token = req.headers.authorization.split(" ")[1]
-  
+
   services.decodeToken(token)
-  .then(response=>{
-    req.user = response
-    next()
-  })
-  .catch(response=>{
-    res.status(response.status).send({mensaje: response.mensaje})
-  })
+    .then(response => {
+      req.user = response
+      next()
+    })
+    .catch(response => {
+      res.status(response.status)
+    })
 }
 
 module.exports = isAuth
