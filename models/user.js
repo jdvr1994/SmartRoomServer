@@ -29,7 +29,7 @@ UserSchema.pre('save',function(next){
   })
 })
 
-UserSchema.methods.gravatar = fuction(){
+UserSchema.methods.gravatar = function(){
     if(!this.email) return `https://gravatar.com/avatar/?s=200&d=retro`
     const md5 = crypto.createHash('md5').update(this.email).digest('hex')
     return `https://gravatar.com/avatar/${md5}?s=200&d=retro`
