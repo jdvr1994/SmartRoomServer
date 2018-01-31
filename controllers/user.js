@@ -24,7 +24,7 @@ function signIn(req, res){
     if(!user) return res.status(404).send({mensaje: 'No existe este usuario'})
     req.user = user
     res.status(200).send({
-      mensaje: 'Te has logeado correctamente'
+      mensaje: 'Te has logeado correctamente',
       token : service.createToken(user)
     })
   })
