@@ -3,7 +3,7 @@ const User = require('../models/user')
 const service = require('../Services')
 
 function signUp(req, res){
-  const User = new User({
+  const user = new User({
     email : req.body.email,
     displayName : req.body.displayName,
   })
