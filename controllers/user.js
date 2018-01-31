@@ -22,6 +22,8 @@ function signIn (req, res) {
     if (err) return res.status(500).send({ message: err })
     if (!user) return res.status(404).send({ message: 'No existe el usuario' })
 
+    console.log(req.body)
+
     req.user = user
     res.status(200).send({
       message: 'Te has logueado correctamente',
