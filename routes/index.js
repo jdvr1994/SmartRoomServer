@@ -14,9 +14,9 @@ api.delete('/product/:productId',ProductCrtl.deleteProduct);
 
 api.get('/private',auth,(req,res)=>{
   res.status(200).send({mensaje: 'Tienes acceso'})
-});
+})
 
-api.post('/signup',UserCtrl.signup)
-api.post('/signin',UserCtrl.signin)
+api.post('/signup',UserCtrl.signUp)
+api.post('/signin',UserCtrl.signIn)
 
 module.exports = api
