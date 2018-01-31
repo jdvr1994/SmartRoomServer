@@ -5,12 +5,11 @@ const service = require('../Services')
 function signUp(req, res){
   const user = new User({
     email : req.body.email,
-    displayName : req.body.displayName,
+    displayName : req.body.displayName
   })
 
   user.save((err) =>{
     if(err) res.status(500).send({mensaje : `Error al crear el Usuario: ${err}`})
-
     res.status(200).send({token : service.createToken(user)})
   })
 
