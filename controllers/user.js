@@ -1,6 +1,4 @@
 'use strict'
-
-const mongoose = require('mongoose')
 const User = require('../models/user')
 const service = require('../Services')
 
