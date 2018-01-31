@@ -1,5 +1,5 @@
 module.exports = {
-  SECRET_TOKEN : 'miclavedetoken'
+  SECRET_TOKEN : 'miclavedetoken',
   db : 'mongodb://localhost:27017/shop',
   portServer : 8080,
   photonID : '2f002f000547343232363230',
