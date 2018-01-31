@@ -37,4 +37,7 @@ function decodeToken(token){
   })
 }
 
-module.exports = createToken
+module.exports = {
+  createToken,
+  decodeToken
+}
