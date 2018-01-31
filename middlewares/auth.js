@@ -20,4 +20,4 @@ function isAuth(req,res, next){
   next()
 }
 
-module.export = isAuth
+module.exports = isAuth
