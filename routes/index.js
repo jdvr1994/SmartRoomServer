@@ -3,7 +3,7 @@
 const express = require('express')
 const ProductCrtl = require('../controllers/product');
 const auth = require('../middlewares/auth')
-const UserCtrl = require('..controllers/user')
+const UserCtrl = require('../controllers/user')
 const api = express.Router()
 
 api.get('/product', ProductCrtl.getProducts);
