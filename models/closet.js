@@ -28,7 +28,7 @@ ClosetSchema.pre('save', function(next){
 })
 
 ClosetSchema.methods.comparePass = function (password,isMatch) {
-  Closet.findOne({ driverId: driver.driverId },'password', (err, closet) => {
+  ClosetSchema.findOne({ driverId: driver.driverId },'password', (err, closet) => {
         bcrypt.compare(password, closet.password, function(err, res) {
           if (err)return console.log({ message: err })
           isMatch(res)
