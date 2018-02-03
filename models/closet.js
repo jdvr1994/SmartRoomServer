@@ -27,10 +27,10 @@ ClosetSchema.pre('save', function(next){
   })
 })
 
-ClosetSchema.methods.comparePass = function (password,hash) {
+ClosetSchema.methods.comparePass = function (password,hash,isMatch) {
   bcrypt.compare(password, hash, function(err, res) {
     if (err)return console.log({ message: err })
-    console.log({ message: 'password correcto' , respuesta: res})
+    isMatch(res)
   });
 }
 
