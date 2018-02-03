@@ -14,7 +14,7 @@ function isAuth(data, next){
       next()
     })
     .catch(response => {
-      console.log("Token Driver incorrecto"+ response.status)
+      console.log("Token Driver incorrecto"+ response)
     })
 }
 
