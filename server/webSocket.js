@@ -1,10 +1,12 @@
 'use strict'
-const app = require('./app');
-const config = require('../config');
-const Photon = require('../controllers/photon');
-const Chat = require('../controllers/chat');
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const app = require('./app')
+const config = require('../config')
+const Photon = require('../controllers/photon')
+const Chat = require('../controllers/chat')
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
+const authWs = require('../middlewares/authWs')
+const ClosetCtrl = require('../controllers/closet')
 
 //---------- Web Socket -----------------------
 //---------------------------------------------
@@ -17,10 +19,16 @@ io.on('connection', function(socket) {
     console.log("Cliente desconectado")
   })
 
-  socket.on('sound-change', function(data){
-	   var driver = JSON.parse(data)
-     Photon.setModeVumeter(driver.sonido.boton)
-	   console.log("android OK"+driver.sonido.boton)
+//------------- Eventos de autorizacion --------------
+  socket.on('authorization',function(driver){
+    authWs(driver,function(data){
+      console.log("Token Driver correcto"+data.driverId)
+    })
+  })
+
+//---------------- Evento SignUp Driver ---------------------------
+  socket.on('signUp',function(driver){
+    ClosetCtrl.signUp
   })
 
   socket.on('vumeter-mode', function(data){
@@ -28,6 +36,8 @@ io.on('connection', function(socket) {
      Photon.setModeVumeter(vumeter.modo)
 	   console.log("android OK"+vumeter.modo)
   })
+
+
 
 });
 
