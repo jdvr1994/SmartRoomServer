@@ -20,7 +20,7 @@ function signIn (driver) {
   Closet.findOne({ driverId: driver.driverId },'driverId password signupDate lastLogin colors', (err, closet) => {
     if (err)return console.log({ message: err })
     if (!closet) return console.log({ message: 'No existe el usuario' })
-    closet.comparePass(driver.password,closets.password)
+    closet.comparePass(driver.password,closet.password)
     closet.password = null
     console.log({
       message: 'Te has logueado correctamente',
