@@ -15,14 +15,14 @@ const ClosetSchema = new Schema({
 
 ClosetSchema.pre('save', (next) => {
   let closet = this
-  //if (!user.isModified('password')) return next()
+  if (!user.isModified('password')) return next()
   bcrypt.genSalt(10, (err, salt) => {
     if (err) return next(err)
 
     bcrypt.hash(closet.password, salt, null, (err, hash) => {
       if (err) return next(err)
       closet.password = hash
-      next(closet)
+      next()
     })
   })
 })
