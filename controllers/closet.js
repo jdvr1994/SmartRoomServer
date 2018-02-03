@@ -21,7 +21,7 @@ function signIn (driver) {
     if (err)return console.log({ message: err })
     if (!closet) return console.log({ message: 'No existe el usuario' })
     closet.comparePass(driver.password,closet.password)
-    closet.password = null
+    
     console.log({
       message: 'Te has logueado correctamente',
       token: service.createToken(closet),
