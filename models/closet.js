@@ -15,7 +15,7 @@ const ClosetSchema = new Schema({
 
 ClosetSchema.pre('save', (next) => {
   let closet = this
-  if (!user.isModified('password')) return next()
+  if (!closet.isModified('password')) return next()
   bcrypt.genSalt(10, (err, salt) => {
     if (err) return next(err)
 
