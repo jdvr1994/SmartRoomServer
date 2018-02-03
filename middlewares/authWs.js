@@ -10,9 +10,7 @@ function isAuth(data, next){
 
   services.decodeToken(token)
     .then(response => {
-      console.log("Token Driver Correcto"+ response)
-      data.driverId = response
-      next()
+      next(response)
     })
     .catch(response => {
       console.log("Token Driver incorrecto"+ response)
