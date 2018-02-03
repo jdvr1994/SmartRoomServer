@@ -27,8 +27,8 @@ ClosetSchema.pre('save', function(next){
   })
 })
 
-ClosetSchema.methods.comparePass = function (password,hash,isMatch) {
-  bcrypt.compare(password, hash, function(err, res) {
+ClosetSchema.methods.comparePass = function (password,isMatch) {
+  bcrypt.compare(password, this.password, function(err, res) {
     if (err)return console.log({ message: err })
     isMatch(res)
   });
