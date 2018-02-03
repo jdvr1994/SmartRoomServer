@@ -27,4 +27,11 @@ ClosetSchema.pre('save', (next) => {
   })
 })
 
+ClosetSchema.methods.comparePass = function (password,hash) {
+  bcrypt.compare(password, hash, function(err, res) {
+    if (err)return console.log({ message: err })
+    console.log({ message: 'password correcto' , respuesta: res})
+  });
+}
+
 module.exports = mongoose.model('Closet', ClosetSchema)
