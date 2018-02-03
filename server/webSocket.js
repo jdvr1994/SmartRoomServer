@@ -21,8 +21,8 @@ io.on('connection', function(socket) {
 
 //------------- Eventos de autorizacion --------------
   socket.on('authorization',function(driver){
-    authWs(driver,function(data){
-      console.log("Token Driver correcto"+data.driverId)
+    authWs(driver,function(driverId){
+      console.log("Token Driver correcto"+driverId)
     })
   })
 
