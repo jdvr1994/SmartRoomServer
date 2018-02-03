@@ -20,7 +20,7 @@ function signIn (driver) {
   Closet.find({ driverId: driver.driverId }, (err, closets) => {
     if (err)return console.log({ message: err })
     if (!closets || closets.length==0) return console.log({ message: 'No existe el usuario' })
-    closet.comparePass(driver.password,closets[0].password)
+    closets[0].comparePass(driver.password,closets[0].password)
 
     console.log({
       message: 'Te has logueado correctamente',
