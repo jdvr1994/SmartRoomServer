@@ -31,6 +31,11 @@ io.on('connection', function(socket) {
     ClosetCtrl.signUp(driver)
   })
 
+//---------------- Evento SignIn Driver ---------------------------
+    socket.on('signIn',function(driver){
+      ClosetCtrl.signIn(driver)
+    })
+
   socket.on('vumeter-mode', function(data){
 	   var vumeter = JSON.parse(data)
      Photon.setModeVumeter(vumeter.modo)

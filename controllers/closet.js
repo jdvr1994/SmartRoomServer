@@ -17,10 +17,15 @@ function signUp (driver) {
 }
 
 function signIn (driver) {
-  Closet.find({ driverId: driver.driverId }, (err, closet) => {
+  Closet.find({ driverId: driver.driverId }, (err, closets) => {
     if (err)return console.log({ message: err })
-    if (!closet || closet.length==0) return console.log({ message: 'No existe el usuario' })
+    if (!closets || closets.length==0) return console.log({ message: 'No existe el usuario' })
 
+    bcrypt.compare(driver.password, closets[0].password, function(err, res) {
+      if (err)return console.log({ message: err })
+      console.log({ message: 'No existe el usuario' , respuesta: res})
+    });
+    
     console.log({
       message: 'Te has logueado correctamente',
       token: service.createToken(closet),
