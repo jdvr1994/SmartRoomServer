@@ -28,7 +28,7 @@ io.on('connection', function(socket) {
 
 //---------------- Evento SignUp Driver ---------------------------
   socket.on('signUp',function(driver){
-    ClosetCtrl.signUp
+    ClosetCtrl.signUp(driver)
   })
 
   socket.on('vumeter-mode', function(data){
