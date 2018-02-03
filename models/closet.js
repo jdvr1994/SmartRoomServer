@@ -13,7 +13,7 @@ const ClosetSchema = new Schema({
   colors : [Number]
 })
 
-ClosetSchema.pre('save', function(next) => {
+ClosetSchema.pre('save', function(next){
   let closet = this
   if (!closet.isModified('password')) return next()
   bcrypt.genSalt(10, (err, salt) => {
