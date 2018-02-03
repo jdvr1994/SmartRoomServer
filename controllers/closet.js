@@ -25,7 +25,7 @@ function signIn (driver) {
     console.log({
       message: 'Te has logueado correctamente',
       token: service.createToken(closets[0]),
-      closet: closet
+      closet: closets[0]
     })
   })
 }
