@@ -28,10 +28,13 @@ ClosetSchema.pre('save', function(next){
 })
 
 ClosetSchema.methods.comparePass = function (password,isMatch) {
-  bcrypt.compare(password, this.password, function(err, res) {
-    if (err)return console.log({ message: err })
-    isMatch(res)
-  });
+  Closet.findOne({ driverId: driver.driverId },'password', (err, closet) => {
+        bcrypt.compare(password, closet.password, function(err, res) {
+          if (err)return console.log({ message: err })
+          isMatch(res)
+        });
+    });
+
 }
 
 module.exports = mongoose.model('Closet', ClosetSchema)
