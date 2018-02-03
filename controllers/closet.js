@@ -17,15 +17,15 @@ function signUp (driver) {
 }
 
 function signIn (driver) {
-  Closet.find({ driverId: driver.driverId }, (err, closets) => {
+  Closet.findOne({ driverId: driver.driverId },'driverId password signupDate lastLogin colors', (err, closet) => {
     if (err)return console.log({ message: err })
-    if (!closets || closets.length==0) return console.log({ message: 'No existe el usuario' })
-    closets[0].comparePass(driver.password,closets[0].password)
-
+    if (!closet) return console.log({ message: 'No existe el usuario' })
+    closet.comparePass(driver.password,closets.password)
+    closet.password = null
     console.log({
       message: 'Te has logueado correctamente',
-      token: service.createToken(closets[0]),
-      closet: closets[0]
+      token: service.createToken(closet),
+      closet: closet
     })
   })
 }

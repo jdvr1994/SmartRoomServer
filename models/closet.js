@@ -6,8 +6,8 @@ const bcrypt = require('bcrypt-nodejs')
 const crypto = require('crypto')
 
 const ClosetSchema = new Schema({
-  driverId: { type: String, unique: true, lowercase: true },
-  password: { type: String, select: false },
+  driverId: { type: String, unique: true,required: true, lowercase: true },
+  password: { type: String, required: true, select: false },
   signupDate: { type: Date, default: Date.now() },
   lastLogin: Date,
   colors : [Number]
