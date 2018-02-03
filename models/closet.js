@@ -22,8 +22,7 @@ ClosetSchema.pre('save', (next) => {
     bcrypt.hash(closet.password, salt, null, (err, hash) => {
       if (err) return next(err)
       closet.password = hash
-      console.log({ message: hash})
-      next()
+      next(closet)
     })
   })
 })
