@@ -53,6 +53,7 @@ io.on('connection', function(socket) {
   })
 
   socket.on('sensorActivado',function(driver){
+    console.log(driver)
     authWs(driver,function(driverId){
       console.log("Token Driver correcto"+driverId)
     })
