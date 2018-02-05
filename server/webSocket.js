@@ -46,7 +46,7 @@ io.on('connection', function(socket) {
   })
 
   socket.on('loginWithCredentials',function(alarma){
-    AlarmaCtrl.signUp(alarma)
+    
   })
 
   //----------------------------------------------------------------------

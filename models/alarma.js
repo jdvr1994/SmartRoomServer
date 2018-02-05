@@ -7,7 +7,7 @@ const crypto = require('crypto')
 
 const AlarmaSchema = new Schema({
   user: { type: String, unique: true,required: true, lowercase: true },
-  password: { type: String, required: true, select: false },
+  pass: { type: String, required: true, select: false },
   signupDate: { type: Date, default: Date.now() },
   lastLogin: Date,
   stateAlarma : Boolean
@@ -15,21 +15,21 @@ const AlarmaSchema = new Schema({
 
 AlarmaSchema.pre('save', function(next){
   let alarma = this
-  if (!alarma.isModified('password')) return next()
+  if (!alarma.isModified('pass')) return next()
   bcrypt.genSalt(10, (err, salt) => {
     if (err) return next(err)
 
-    bcrypt.hash(alarma.password, salt, null, (err, hash) => {
+    bcrypt.hash(alarma.pass, salt, null, (err, hash) => {
       if (err) return next(err)
-      alarma.password = hash
+      alarma.pass = hash
       next()
     })
   })
 })
 
-AlarmaSchema.methods.comparePass = function (password,isMatch) {
-  mongoose.model('Alarma', AlarmaSchema).findOne({ user: this.user },'password', (err, alarma) => {
-        bcrypt.compare(password, alarma.password, function(err, res) {
+AlarmaSchema.methods.comparePass = function (pass,isMatch) {
+  mongoose.model('Alarma', AlarmaSchema).findOne({ user: this.user },'pass', (err, alarma) => {
+        bcrypt.compare(pass, alarma.pass, function(err, res) {
           if (err)return console.log({ message: err })
           isMatch(res)
         });
