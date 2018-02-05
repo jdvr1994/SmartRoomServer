@@ -7,6 +7,7 @@ const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const authWs = require('../middlewares/authWs')
 const ClosetCtrl = require('../controllers/closet')
+const AlarmaCtrl = require('../controllers/alarma')
 
 //---------- Web Socket -----------------------
 //---------------------------------------------
@@ -26,15 +27,29 @@ io.on('connection', function(socket) {
     })
   })
 
+//----------------- socket.emit('signIn', {driverId: 'jdvr1994', password: '2134darkjljl'});
 //---------------- Evento SignUp Driver ---------------------------
   socket.on('signUp',function(driver){
     ClosetCtrl.signUp(driver)
   })
 
 //---------------- Evento SignIn Driver ---------------------------
-    socket.on('signIn',function(driver){
-      ClosetCtrl.signIn(driver)
-    })
+  socket.on('signIn',function(driver){
+    ClosetCtrl.signIn(driver)
+  })
+
+
+//------------------------ Para alarmaIOT ------------------------------
+//----------------------------------------------------------------------
+  socket.on('signUpAlarma',function(alarma){
+    AlarmaCtrl.signUp(alarma)
+  })
+
+  socket.on('loginWithCredentials',function(alarma){
+    AlarmaCtrl.signUp(alarma)
+  })
+
+  //----------------------------------------------------------------------
 
   socket.on('vumeter-mode', function(data){
 	   var vumeter = JSON.parse(data)
