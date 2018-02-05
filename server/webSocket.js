@@ -63,7 +63,10 @@ io.on('connection', function(socket) {
  //--------------------------- Eventos desde Android --------------------
  //----------------------------------------------------------------------
   socket.on('androidConnection', function(data){
+    AlarmaCtrl.signIn(alarma, function(result){
+      socket.emit('loadAlarma', result.alarma);
       socket.join('androidAlarma');
+    })
   });
 
   socket.on('changeStateAlarma', function(data){
