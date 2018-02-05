@@ -52,6 +52,12 @@ io.on('connection', function(socket) {
     })
   })
 
+  socket.on('sensorActivado',function(driver){
+    authWs(driver,function(driverId){
+      console.log("Token Driver correcto"+driverId)
+    })
+  })
+
   //----------------------------------------------------------------------
 
   socket.on('vumeter-mode', function(data){
