@@ -1,6 +1,6 @@
 'use strict'
 
-const Closet = require('../models/alarma')
+const Alarma = require('../models/alarma')
 const service = require('../Services')
 
 function signUp (driver) {
