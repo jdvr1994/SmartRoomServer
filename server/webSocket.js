@@ -49,16 +49,26 @@ io.on('connection', function(socket) {
     AlarmaCtrl.signIn(alarma, function(result){
       socket.emit('login-response', result.alarma);
       socket.emit('getTokenAuth', {token:result.token});
+      socket.join('Alarma');
     })
   })
 
   socket.on('sensorActivado',function(driver){
-    console.log(driver)
     authWs(driver,function(driverId){
       console.log("Token Driver correcto"+driverId)
+      io.to('androidAlarma').emit('motionDetected',0);
     })
   })
 
+ //--------------------------- Eventos desde Android --------------------
+ //----------------------------------------------------------------------
+  socket.on('androidConnection', function(data){
+      socket.join('androidAlarma');
+  });
+
+  socket.on('changeStateAlarma', function(data){
+      io.to('Alarma').emit('changeStateAlarma',data);
+  });
   //----------------------------------------------------------------------
 
   socket.on('vumeter-mode', function(data){

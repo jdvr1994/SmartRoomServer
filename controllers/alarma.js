@@ -36,6 +36,16 @@ function signIn (driver,next) {
   })
 }
 
+function updateDriver(driver,next){
+  let driverId = driver._id
+  let update = driver
+
+  Alarma.findByIdAndUpdate(driverId, update, function(err, alarmaUpdate){
+    if(err) return console.log({mensaje : `Error al actualizar el producto: ${err}`})
+    console.log({alarma: alarmaUpdate})
+  });
+}
+
 module.exports = {
   signUp,
   signIn
