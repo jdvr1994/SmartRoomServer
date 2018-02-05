@@ -62,7 +62,8 @@ io.on('connection', function(socket) {
 
  //--------------------------- Eventos desde Android --------------------
  //----------------------------------------------------------------------
-  socket.on('androidConnection', function(alarma){
+  socket.on('androidConnection', function(data){
+    var alarma = JSON.parse(data);
     console.log("Se conecto Android con la alarma: "+alarma.user)
     AlarmaCtrl.signIn(alarma, function(result){
       socket.emit('loadAlarma', result.alarma);
