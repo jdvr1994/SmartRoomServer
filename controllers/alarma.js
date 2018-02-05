@@ -24,7 +24,7 @@ function signIn (driver) {
       if(isMatch){
         console.log({
           message: 'Te has logueado correctamente',
-          token: service.createToken(closet),
+          token: service.createToken(alarma),
           alarma: alarma
         })
       }else{
