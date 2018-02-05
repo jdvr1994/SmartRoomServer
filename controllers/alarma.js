@@ -16,13 +16,13 @@ function signUp (driver) {
   })
 }
 
-function signIn (driver) {
+function signIn (driver,next) {
   Alarma.findOne({ user: driver.user }, (err, alarma) => {
     if (err)return console.log({ message: err })
     if (!alarma) return console.log({ message: 'No existe el usuario' })
     alarma.comparePass(driver.pass,function(isMatch){
       if(isMatch){
-        console.log({
+        next({
           message: 'Te has logueado correctamente',
           token: service.createToken(alarma),
           alarma: alarma
