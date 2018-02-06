@@ -23,9 +23,9 @@ function IOTEvents(io,socket){
     })
 
     //------------- Eventos de autorizacion --------------
-    socket.on('loginWithToken',function(driver){
-      authWs(driver,function(error,driverId){
-        if(error) return socket.emit("tokenFailed")
+    socket.on('loginWithToken',function(data){
+      authWs({token: data},function(error,driverId){
+        if(error) return socket.emit("tokenFailed",0)
         console.log("Token Driver correcto"+ driverId)
         socket.join('Alarma');
       })
