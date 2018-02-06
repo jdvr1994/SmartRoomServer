@@ -24,6 +24,7 @@ io.on('connection', function(socket) {
   socket.on('authorization',function(driver){
     authWs(driver,function(driverId){
       console.log("Token Driver correcto"+driverId)
+      socket.join('Alarma');
     })
   })
 
@@ -84,6 +85,10 @@ io.on('connection', function(socket) {
         io.to('Alarma').emit('changeStateAlarma',result.alarma);
         console.log(result.alarma)
       })
+  });
+
+  socket.on('activarSirena', function(data){
+      io.to('Alarma').emit('changeStateAlarma',0);
   });
   //----------------------------------------------------------------------
 
