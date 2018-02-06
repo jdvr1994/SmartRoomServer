@@ -79,7 +79,7 @@ io.on('connection', function(socket) {
       })
   });
 
-  socket.on('changeStateAlarma', function(alarma){
+  socket.on('update', function(alarma){
       AlarmaCtrl.updateDriver(alarma, function(result){
         socket.emit('loadAlarma', result.alarma);
         io.to('Alarma').emit('changeStateAlarma',result.alarma.stateAlarma);
