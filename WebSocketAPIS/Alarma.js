@@ -16,23 +16,23 @@ function IOTEvents(io,socket){
 
     socket.on('loginWithCredentials',function(alarma){
       AlarmaCtrl.signIn(alarma, function(result){
-        socket.emit('login-response', result.alarma);
-        socket.emit('getTokenAuth', {token:result.token});
+        socket.emit('login-response', result.alarma)
+        socket.emit('getTokenAuth', {token:result.token})
         socket.join('Alarma');
       })
     })
 
     //------------- Eventos de autorizacion --------------
-    socket.on('authorization',function(driver){
-      authWs(driver,function(driverId){
-        console.log("Token Driver correcto"+driverId)
+    socket.on('loginWithToken',function(driver){
+      authWs(driver,function(error,driverId){
+        if(error) return socket.emit("tokenFailed")
+        console.log("Token Driver correcto"+ driverId)
         socket.join('Alarma');
       })
     })
 
     socket.on('sensorActivado',function(driver){
-      authWs(driver,function(driverId){
-        console.log("Token Driver correcto"+driverId)
+      authWs(driver,function(error,driverId){
         io.to('androidAlarma').emit('motionDetected',0);
       })
     })
