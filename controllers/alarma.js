@@ -36,11 +36,9 @@ function signIn (driver,next) {
 
 function updateDriver(driver,next){
   let driverId = driver._id
-  let update = new Alarma({
-    user: driver.user,
-    pass: driver.pass,
+  let update = {
     stateAlarma : driver.stateAlarma
-  });
+  }
 
 
   Alarma.findByIdAndUpdate(driverId, update, function(err, alarmaUpdate){
