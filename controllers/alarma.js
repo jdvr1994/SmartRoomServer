@@ -40,10 +40,9 @@ function updateDriver(driver,next){
     stateAlarma : driver.stateAlarma
   }
 
-
   Alarma.findByIdAndUpdate(driverId, update, function(err, alarmaUpdate){
     if(err) return console.log({mensaje : `Error al actualizar el producto: ${err}`})
-    console.log("alarm Update"+alarmaUpdate)
+    alarmaUpdate.stateAlarma = driver.stateAlarma
     next({
       message: 'Stata Alarma Actualizada',
       alarma: alarmaUpdate
