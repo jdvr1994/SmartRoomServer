@@ -45,6 +45,12 @@ io.on('connection', function(socket) {
     AlarmaCtrl.signUp(alarma)
   })
 
+  socket.on('deleteAlarma', function(alarma){
+    AlarmaCtrl.deleteAlarma(alarma, function(result){
+
+    })
+  });
+
   socket.on('loginWithCredentials',function(alarma){
     AlarmaCtrl.signIn(alarma, function(result){
       socket.emit('login-response', result.alarma);
@@ -73,13 +79,6 @@ io.on('connection', function(socket) {
 
   socket.on('changeStateAlarma', function(data){
       var alarma = JSON.parse(data);
-      AlarmaCtrl.updateDriver(alarma, function(result){
-        socket.emit('loadAlarma', result.alarma);
-        io.to('Alarma').emit('changeStateAlarma',result.alarma.stateAlarma);
-      })
-  });
-
-  socket.on('update', function(alarma){
       AlarmaCtrl.updateDriver(alarma, function(result){
         socket.emit('loadAlarma', result.alarma);
         io.to('Alarma').emit('changeStateAlarma',result.alarma.stateAlarma);
