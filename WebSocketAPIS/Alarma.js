@@ -1,4 +1,5 @@
 'use strict'
+const authWs = require('../middlewares/authWs')
 const AlarmaCtrl = require('../controllers/alarma')
 //------------------------ Para alarmaIOT ------------------------------
 //----------------------------------------------------------------------

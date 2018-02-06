@@ -1,10 +1,9 @@
 'use strict'
-const app = require('./app')
 const config = require('../config')
+
+const app = require('./app')
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
-const authWs = require('../middlewares/authWs')
-
 
 const Chat = require('../WebSocketAPIS/Chat')
 const Photon = require('../WebSocketAPIS/Photon')
