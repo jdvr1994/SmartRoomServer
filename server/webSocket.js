@@ -88,7 +88,7 @@ io.on('connection', function(socket) {
   });
 
   socket.on('activarSirena', function(data){
-      io.to('Alarma').emit('changeStateAlarma',0);
+      io.to('Alarma').emit('onAlarma',0);
   });
   //----------------------------------------------------------------------
 
