@@ -56,7 +56,6 @@ function deleteDriver(driver){
         console.log({message: 'driver Eliminado'})
       })
     })
-  })
 }
 
 module.exports = {
