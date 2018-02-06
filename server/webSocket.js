@@ -1,13 +1,15 @@
 'use strict'
 const app = require('./app')
 const config = require('../config')
-const Photon = require('../controllers/photon')
-const Chat = require('../controllers/chat')
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const authWs = require('../middlewares/authWs')
-const ClosetCtrl = require('../controllers/closet')
-const AlarmaCtrl = require('../controllers/alarma')
+
+
+const Chat = require('../WebSocketAPIS/Chat')
+const Photon = require('../WebSocketAPIS/Photon')
+const Alarma = require('../WebSocketAPIS/Alarma')
+const Closet = require('../WebSocketAPIS/Closet')
 
 //---------- Web Socket -----------------------
 //---------------------------------------------
@@ -16,90 +18,18 @@ io.on('connection', function(socket) {
   Chat.begin(socket)
   Chat.newMessage(socket,io)
 
+  Alarma.IOTEvents(io,socket)
+  Alarma.AndroidEvents(io, socket)
+
+  Closet.IOTEvents(io, socket)
+  Closet.AndroidEvents(io, socket)
+
+  Photon.IOTEvents(io, socket)
+  Photon.AndroidEvents(io, socket)
+
   socket.on('disconnect', function(data) {
     console.log("Cliente desconectado")
   })
-
-//------------- Eventos de autorizacion --------------
-  socket.on('authorization',function(driver){
-    authWs(driver,function(driverId){
-      console.log("Token Driver correcto"+driverId)
-      socket.join('Alarma');
-    })
-  })
-
-//----------------- socket.emit('signIn', {driverId: 'jdvr1994', password: '2134darkjljl'});
-//---------------- Evento SignUp Driver ---------------------------
-  socket.on('signUp',function(driver){
-    ClosetCtrl.signUp(driver)
-  })
-
-//---------------- Evento SignIn Driver ---------------------------
-  socket.on('signIn',function(driver){
-    ClosetCtrl.signIn(driver)
-  })
-
-
-//------------------------ Para alarmaIOT ------------------------------
-//----------------------------------------------------------------------
-  socket.on('signUpAlarma',function(alarma){
-    AlarmaCtrl.signUp(alarma)
-  })
-
-  socket.on('deleteAlarma', function(alarma){
-    AlarmaCtrl.deleteDriver(alarma, function(result){
-
-    })
-  });
-
-  socket.on('loginWithCredentials',function(alarma){
-    AlarmaCtrl.signIn(alarma, function(result){
-      socket.emit('login-response', result.alarma);
-      socket.emit('getTokenAuth', {token:result.token});
-      socket.join('Alarma');
-    })
-  })
-
-  socket.on('sensorActivado',function(driver){
-    authWs(driver,function(driverId){
-      console.log("Token Driver correcto"+driverId)
-      io.to('androidAlarma').emit('motionDetected',0);
-    })
-  })
-
- //--------------------------- Eventos desde Android --------------------
- //----------------------------------------------------------------------
-  socket.on('androidConnection', function(data){
-    var alarma = JSON.parse(data);
-    console.log("Se conecto Android con la alarma: "+data)
-    AlarmaCtrl.signIn(alarma, function(result){
-      socket.emit('loadAlarma', result.alarma);
-      socket.join('androidAlarma');
-    })
-  });
-
-  socket.on('changeStateAlarma', function(data){
-      var alarma = JSON.parse(data);
-      AlarmaCtrl.updateDriver(alarma, function(result){
-        socket.emit('loadAlarma', result.alarma);
-        io.to('Alarma').emit('changeStateAlarma',result.alarma);
-        console.log(result.alarma)
-      })
-  });
-
-  socket.on('activarSirena', function(data){
-      io.to('Alarma').emit('onAlarma',0);
-  });
-  //----------------------------------------------------------------------
-
-  socket.on('vumeter-mode', function(data){
-	   var vumeter = JSON.parse(data)
-     Photon.setModeVumeter(vumeter.modo)
-	   console.log("android OK"+vumeter.modo)
-  })
-
-
-
 });
 
 module.exports = server
