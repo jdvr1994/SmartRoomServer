@@ -46,7 +46,7 @@ io.on('connection', function(socket) {
   })
 
   socket.on('deleteAlarma', function(alarma){
-    AlarmaCtrl.deleteAlarma(alarma, function(result){
+    AlarmaCtrl.deleteDriver(alarma, function(result){
 
     })
   });
