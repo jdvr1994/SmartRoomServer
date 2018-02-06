@@ -81,7 +81,7 @@ io.on('connection', function(socket) {
       var alarma = JSON.parse(data);
       AlarmaCtrl.updateDriver(alarma, function(result){
         socket.emit('loadAlarma', result.alarma);
-        io.to('Alarma').emit('changeStateAlarma',result.alarma.stateAlarma);
+        io.to('Alarma').emit('changeStateAlarma',result.alarma);
       })
   });
   //----------------------------------------------------------------------
