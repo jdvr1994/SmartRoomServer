@@ -78,6 +78,13 @@ io.on('connection', function(socket) {
         io.to('Alarma').emit('changeStateAlarma',result.alarma.stateAlarma);
       })
   });
+
+  socket.on('changeStateAlarma', function(alarma){
+      AlarmaCtrl.updateDriver(alarma, function(result){
+        socket.emit('loadAlarma', result.alarma);
+        io.to('Alarma').emit('changeStateAlarma',result.alarma.stateAlarma);
+      })
+  });
   //----------------------------------------------------------------------
 
   socket.on('vumeter-mode', function(data){
