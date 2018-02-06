@@ -51,15 +51,10 @@ function deleteDriver(driver){
   Alarma.findOne({ user: driver.user }, (err, alarma) => {
     if (err)return console.log({ message: err })
     if (!alarma) return console.log({ message: 'No existe el usuario' })
-    alarma.comparePass(driver.pass,function(isMatch){
-      if(isMatch){
-        alarma.remove(function(err){
-          if(err) return console.log({message: 'Error al eliminar'})
-          console.log({message: 'driver Eliminado'})
-        })
-      }else{
-        console.log({message: 'Contraseña incorrecta'})
-      }
+      alarma.remove(function(err){
+        if(err) return console.log({message: 'Error al eliminar'})
+        console.log({message: 'driver Eliminado'})
+      })
     })
   })
 }
