@@ -68,5 +68,5 @@ module.exports = {
   signUp,
   signIn,
   updateDriver,
-  deleteAlarma
+  deleteDriver
 }
