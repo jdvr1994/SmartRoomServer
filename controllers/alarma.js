@@ -43,6 +43,7 @@ function updateDriver(driver,next){
 
   Alarma.findByIdAndUpdate(driverId, update, function(err, alarmaUpdate){
     if(err) return console.log({mensaje : `Error al actualizar el producto: ${err}`})
+    console.log("alarm Update"+alarmaUpdate)
     next({
       message: 'Stata Alarma Actualizada',
       alarma: alarmaUpdate
