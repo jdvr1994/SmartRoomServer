@@ -27,7 +27,10 @@ function IOTEvents(io,socket){
       authWs(driver,function(error,driverId){
         if(error) return socket.emit("tokenFailed",0)
         console.log("Token Driver correcto"+ driverId)
-        socket.join('Alarma');
+        getDriver(driverId,function(err,alarma){
+          socket.emit('login-response', alarma)
+          socket.join('Alarma')
+        })
       })
     })
 
