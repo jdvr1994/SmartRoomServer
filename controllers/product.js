@@ -25,8 +25,7 @@ function saveProduct(req, res){
 
   product.save(function(err,productStored){
     if(err) res.status(500).send({mensaje : `Error al salvar en la base de datos: ${err}`})
-
-    res.status(200).send({product: productStored})
+    res.status(200).send(productStored)
   })
 }
 
