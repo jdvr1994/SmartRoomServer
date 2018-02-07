@@ -27,7 +27,7 @@ function IOTEvents(io,socket){
       authWs(driver,function(error,driverId){
         if(error) return socket.emit("tokenFailed",0)
         console.log("Token Driver correcto"+ driverId)
-        getDriver(driverId,function(err,alarma){
+          getDriver(driverId,function(err,alarma){
           socket.emit('login-response', alarma)
           socket.join('Alarma')
         })
@@ -47,7 +47,8 @@ function AndroidEvents(io,socket){
    socket.on('androidConnection', function(data){
      var alarma = JSON.parse(data);
      console.log("Se conecto Android con la alarma: "+data)
-       AlarmaCtrl.signIn(alarma, function(result){
+     AlarmaCtrl.signIn(alarma, function(error,result){
+       if(error!=0) return socket.emit('loginFailed', error);
        socket.emit('loadAlarma', result.alarma);
        socket.join('androidAlarma');
      })
@@ -55,7 +56,7 @@ function AndroidEvents(io,socket){
 
    socket.on('changeStateAlarma', function(data){
        var alarma = JSON.parse(data);
-         AlarmaCtrl.updateDriver(alarma, function(result){
+       AlarmaCtrl.updateDriver(alarma, function(result){
          socket.emit('loadAlarma', result.alarma);
          io.to('Alarma').emit('changeStateAlarma',result.alarma);
          console.log(result.alarma)

@@ -18,17 +18,18 @@ const service = require('../Services')
 
   function signIn (driver,next) {
     Alarma.findOne({ user: driver.user }, (err, alarma) => {
-      if (err)return console.log({ message: err })
-      if (!alarma) return console.log({ message: 'No existe el usuario' })
+      if (err)return next(1,null)
+      if (!alarma) return next(2,null)
       alarma.comparePass(driver.pass,function(isMatch){
         if(isMatch){
-          next({
+          next(0,{
             message: 'Te has logueado correctamente',
             token: service.createToken(alarma),
             alarma: alarma
           })
         }else{
           console.log({message: 'Contraseña incorrecta'})
+          next(3,null)
         }
       })
     })
