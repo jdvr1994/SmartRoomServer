@@ -15,10 +15,8 @@ function IOTEvents(io,socket){
     });
 
     socket.on('loginWithCredentials',function(alarma){
-      console.log(alarma)
-      AlarmaCtrl.signIn(alarma, function(result){
-        console.log(result.alarma)
-        console.log({token:result.token})
+      AlarmaCtrl.signIn(alarma, function(err,result){
+        if(err)return 0
         socket.emit('login-response', result.alarma)
         socket.emit('getTokenAuth', {token:result.token})
         socket.join('Alarma');
