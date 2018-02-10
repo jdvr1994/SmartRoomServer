@@ -15,7 +15,7 @@ mongoose.connect(config.db,function(err, res){
 
     server.listen(config.portServer, function() {
       console.log("Servidor corriendo en http://localhost:"+config.portServer);
-      let date = new Date(moment.tz(Date.now(),"America/Bogota").format())
+      let date = new Date(moment.tz(Date.now(),"America/Bogota"))
       console.log("Date: "+date)
       console.log("Date moment: "+moment.tz(Date.now(),"America/Bogota").format())
     });
