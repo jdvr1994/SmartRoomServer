@@ -5,6 +5,7 @@ const app = require('./app')
 const server = require('./webSocket')
 const config = require('../config')
 const mongoose = require('mongoose')
+const moment = require('moment')
 
 mongoose.connect(config.db,function(err, res){
     if(err) {
@@ -14,5 +15,6 @@ mongoose.connect(config.db,function(err, res){
 
     server.listen(config.portServer, function() {
       console.log("Servidor corriendo en http://localhost:"+config.portServer);
+      console.log("Date: "+moment.tz(Date.now(),"America/Bogota").format())
     });
 })
