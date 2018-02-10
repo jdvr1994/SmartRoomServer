@@ -17,10 +17,10 @@ mongoose.connect(config.db,function(err, res){
       console.log("Servidor corriendo en http://localhost:"+config.portServer);
       let date = new Date(moment.tz(Date.now(),"America/Bogota"))
 
-      d = new Date();
-      utc = d.getTime() + (d.getTimezoneOffset() * 60000);
-      offset = -5;
-      nd = new Date(utc + (3600000*offset));
+      let d = new Date();
+      let utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+      let offset = -5;
+      let nd = new Date(utc + (3600000*offset));
 
       console.log("Date: "+date)
       console.log("Date: "+nd)
