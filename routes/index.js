@@ -18,5 +18,6 @@ api.get('/private',auth,(req,res)=>{
 
 api.post('/signup',UserCtrl.signUp)
 api.post('/signin',UserCtrl.signIn)
+api.get('/users', UserCtrl.getUsers);
 
 module.exports = api
