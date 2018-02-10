@@ -18,12 +18,6 @@ mongoose.connect(config.db,function(err, res){
       let date = new Date(moment.tz(Date.now(),"America/Bogota"))
 
       let d = new Date();
-      let utc = d.getTime() + (d.getTimezoneOffset() * 60000);
-      let offset = -5;
-      let nd = new Date(utc + (3600000*offset));
-
-      console.log("Date: "+date)
-      console.log("Date: "+nd)
-      console.log("Date moment: "+moment.tz(Date.now(),"America/Bogota").format())
+      console.log("Date: "+d)
     });
 })
