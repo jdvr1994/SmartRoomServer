@@ -5,7 +5,7 @@ const app = require('./app')
 const server = require('./webSocket')
 const config = require('../config')
 const mongoose = require('mongoose')
-const moment = require('moment')
+const moment = require('moment-timezone')
 
 mongoose.connect(config.db,function(err, res){
     if(err) {
