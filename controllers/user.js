@@ -29,6 +29,14 @@ function signIn (req, res) {
   })
 }
 
+function getUsers(req,res){
+  User.find({}, function(err, users){
+    if(err) return res.status(500).send({mensaje : `Error al realizar la peticion: ${err}`})
+    if(!users) return res.status(404).send({mensaje: 'No hay ningun producto registrado'})
+    res.status(200).send(users);
+  })
+}
+
 module.exports = {
   signUp,
   signIn
