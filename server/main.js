@@ -16,7 +16,14 @@ mongoose.connect(config.db,function(err, res){
     server.listen(config.portServer, function() {
       console.log("Servidor corriendo en http://localhost:"+config.portServer);
       let date = new Date(moment.tz(Date.now(),"America/Bogota"))
+
+      d = new Date();
+      utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+      offset = -5;
+      nd = new Date(utc + (3600000*offset));
+
       console.log("Date: "+date)
+      console.log("Date: "+nd)
       console.log("Date moment: "+moment.tz(Date.now(),"America/Bogota").format())
     });
 })
