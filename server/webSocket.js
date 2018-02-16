@@ -12,12 +12,6 @@ const Photon = require('../WebSocketAPIS/Photon')
 const Alarma = require('../WebSocketAPIS/Alarma')
 const Closet = require('../WebSocketAPIS/Closet')
 
-const options = {
-  key: fs.readFileSync('/path/to/key.pem'),
-  cert: fs.readFileSync('/path/to/cert.pem')
-};
-
-https.createServer(options, app).listen(443)
 //---------- Web Socket -----------------------
 //---------------------------------------------
 io.on('connection', function(socket) {
