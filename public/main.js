@@ -1,4 +1,4 @@
-var socket = io.connect('http://146.71.79.215:8080', { 'forceNew': true });
+var socket = io.connect('http://209.182.218.174:8080', { 'forceNew': true });
 
 socket.on('messages', function(data) {
   console.log(data);
